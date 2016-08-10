@@ -40,27 +40,16 @@ typedef struct {
 
 /****************************** BOARD OPERATIONS ******************************/
 
-// Checks if position (x, y) is inside the grid
-bool checkBounds (Board board, int x, int y);
-
-// Returns the value of a specific grid cell
-char get (Board board, int x, int y);
-
-// Sets the value of a specific grid cell to a new 'value'
-void set (Board board, int x, int y, char value);
 
 // Adds num mines to a board
 void setMines (Board board, int num);
 
-// Returns the area of the grid
-int size(Board board);
 
 // Traverses a board and sets each CLEAR to the number of mines around it
 void setCellState(Board board);
 
 void printBoard(Board board);
 
-Board buildBoardFromFile(char file[]);
 
 // Counts cells on the board that have the same type as 'type'
 int countCells (Board board, char type);
