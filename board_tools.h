@@ -4,8 +4,6 @@ void setMines (Board board, int num);
 // Traverses a board and sets each CLEAR to the number of mines around it
 void setCellState(Board board);
 
-void printBoard(Board board);
-
 // Counts cells on the board that have the same type as 'type'
 int countCells (Board board, char type);
 
