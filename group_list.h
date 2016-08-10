@@ -1,3 +1,6 @@
+
+#define GSIZE 1000000
+
 // Simple way to have a list with all the current groups
 Group groupList[GSIZE];
 
