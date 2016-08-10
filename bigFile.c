@@ -23,11 +23,6 @@
 #define MAX(a, b) b > a ? b : a
 #define MIN(a, b) b < a ? b : a
 
-typedef struct {
-	int width;
-	int height;
-	char *grid;
-} Board ;
 
 /** POSSIBLE IMPROVEMENTS
  * Decouple the solver from the game engine (makePlay and alikes)
