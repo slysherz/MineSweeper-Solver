@@ -18,3 +18,5 @@ void set (Board board, int x, int y, char value);
 int size(Board board);
 
 Board buildBoardFromFile(char file[]);
+
+void printBoard(Board board);
