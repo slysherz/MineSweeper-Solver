@@ -34,7 +34,6 @@
 /****************************** AUTOMATED SOLVER ******************************/
 int solveMineSweeper(Board boardh, Board boardv);
 
-Group buildGroup (Board board, int x, int y);
 
 /******************************* USER INTERFACE *******************************/
 
@@ -304,48 +303,3 @@ MAYBE(printf("Marking Mine (%d,%d)\n", groupList[i].positions[j][0], groupList[i
 		}
 	}
 }
-
-Group buildGroup(Board board, int x, int y) {
-	Group group;
-	
-	group.mines = (int) get(board, x, y) - (int) '0' - countClose(board, x, y, MINE);
-	int n = 0;
-	for (int i = -1; i <= 1; i++) {
-		for (int j = -1; j <= 1; j++) {
-			if (!(i == 0 && j == 0) && get(board, x+i, y+j) == UNKNOWN) {
-				group.positions[n][0] = x + i;
-				group.positions[n][1] = y + j;
-				n++;
-			}
-		}
-	}
-	group.size = n;
-
-	return group;
-}
-
-//Group groupList[1000000];
-//int groupListArrayNumber = 0;
-void addToList (Group group) {
-	if (groupListArrayNumber>=GSIZE){
-		printf("groupList full!!!");
-		exit(0);
-	}
-	groupList[groupListArrayNumber] = group;
-	groupListArrayNumber++;
-}
-
-
-void removeFromList (int index) {
-	if (index >= groupListArrayNumber) {
-		printf("OUT OF BOUNDS! Index: %d", index);
-		return;
-	}
-	
-	for (int i = index + 1; i < groupListArrayNumber; i++) {
-		groupList[i - 1] = groupList[i];
-	}
-	
-	groupListArrayNumber--;
-}
-
