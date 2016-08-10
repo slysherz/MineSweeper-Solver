@@ -5,6 +5,8 @@ typedef struct {
 	int size;
 } Group ;
 
+Group buildGroup (Board board, int x, int y);
+
 void printGroup (Group group);
 
 // Is cell (x, y) contained in group?
