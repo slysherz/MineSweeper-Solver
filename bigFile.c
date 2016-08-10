@@ -15,8 +15,6 @@
 #define WON 1
 #define LOST 2
 
-#define GSIZE 1000000
-
 #define MAYBE_ON 0
 #define MAYBE(x) if (MAYBE_ON) x
 
