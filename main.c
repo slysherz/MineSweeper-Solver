@@ -21,16 +21,6 @@
 #define MAX(a, b) b > a ? b : a
 #define MIN(a, b) b < a ? b : a
 
-
-/** POSSIBLE IMPROVEMENTS
- * Decouple the solver from the game engine (makePlay and alikes)
- * Add code to GitHub
- * Split functionality into multiple files
- * clean main()
- * find a way to include the group with all the cells (maybe use a pointer in the struct instaed of 2D array)
-
-*/
-
 //args: width height mines ...
 int main (int argv, char *argc[]) {
 	Board boardh; //boardh == board hidden
