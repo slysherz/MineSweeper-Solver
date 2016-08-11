@@ -4,7 +4,11 @@
 #include <memory.h>
 #include <stdbool.h>
 
-//
+#include <board.h>
+#include <board_tools.h>
+#include <solver.h>
+#include <ui.h>
+
 #define MINE 'M'
 #define OUT_OF_BOUNDS 'E'
 #define CLEAR 'C'
