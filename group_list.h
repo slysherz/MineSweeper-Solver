@@ -1,3 +1,4 @@
+#pragma once
 
 #define GSIZE 1000000
 
