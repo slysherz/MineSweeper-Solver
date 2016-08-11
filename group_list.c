@@ -1,7 +1,7 @@
 #include "group_list.h"
 
 //Group groupList[1000000];
-//int groupListArrayNumber = 0;
+extern int groupListArrayNumber;
 void addToList (Group group) {
 	if (groupListArrayNumber>=GSIZE){
 		printf("groupList full!!!");

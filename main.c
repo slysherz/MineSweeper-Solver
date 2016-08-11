@@ -5,9 +5,11 @@
 #include <stdbool.h>
 
 //#include <board.h>
-#include <board_tools.h>
+//#include <board_tools.h>
 #include <solver.h>
 #include <ui.h>
+
+int groupListArrayNumber = 0;
 
 //args: width height mines ...
 int main (int argv, char *argc[]) {
