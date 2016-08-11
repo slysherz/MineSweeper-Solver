@@ -1,3 +1,5 @@
+#include "group.h"
+
 Group buildGroup(Board board, int x, int y) {
 	Group group;
 	
