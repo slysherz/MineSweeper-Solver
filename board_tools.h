@@ -1,3 +1,4 @@
+#pragma once
 
 // Adds num mines to a board
 void setMines (Board board, int num);
