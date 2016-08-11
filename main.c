@@ -4,7 +4,7 @@
 #include <memory.h>
 #include <stdbool.h>
 
-#include <board.h>
+//#include <board.h>
 #include <board_tools.h>
 #include <solver.h>
 #include <ui.h>
