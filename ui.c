@@ -1,3 +1,5 @@
+#include <ui.h>
+
 void getMineSweeperInput (int *x, int *y, char *played) {
 	char separator[16];
 	

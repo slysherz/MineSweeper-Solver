@@ -1,5 +1,7 @@
 #pragma once
 
+#include <board_tools.h>
+
 // A group is a list with 'size' cells, which contains 'mines' mines
 typedef struct {
 	int mines;

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <stdio.h>
+
+#include <group.h>
+
 #define GSIZE 1000000
 
 // Simple way to have a list with all the current groups

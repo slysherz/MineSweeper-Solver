@@ -1,4 +1,4 @@
-include "board.h"
+#include <board.h>
 
 void printBoard(Board board) {
 	puts("\n");
@@ -48,10 +48,10 @@ Board buildBoardFromFile (char *file) {
 		exit(0);
 	}
 	else {
-		char buff[GSIZE];
+		char buff[LIMIT];
 		int width = 0;
 		int height = 0;
-		while (fgets(buff, GSIZE, filePtr) != NULL)
+		while (fgets(buff, LIMIT, filePtr) != NULL)
 		{
 			for (int x = 0; x < strlen(buff); x++) {
 				if(buff[x] == '\n' || buff[x] == '\r') {
@@ -75,7 +75,7 @@ Board buildBoardFromFile (char *file) {
 		
 		printf("Width: %d, Height: %d\n", width, height);
 		for (int y = 0; y < height; y++) {
-			fgets(buff, GSIZE, filePtr);
+			fgets(buff, LIMIT, filePtr);
 			
 			for (int x = 0; x < strlen(buff); x++) {
 				if(buff[x] == '\n' || buff[x] == '\r') {

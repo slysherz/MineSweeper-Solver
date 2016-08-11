@@ -1,5 +1,7 @@
 #pragma once
 
+#include <time.h>
+
 #include <board.h>
 
 // Adds num mines to a board

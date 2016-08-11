@@ -9,22 +9,6 @@
 #include <solver.h>
 #include <ui.h>
 
-#define MINE 'M'
-#define OUT_OF_BOUNDS 'E'
-#define CLEAR 'C'
-#define UNKNOWN '?'
-
-// Play results
-#define NEUTRAL 0
-#define WON 1
-#define LOST 2
-
-#define MAYBE_ON 0
-#define MAYBE(x) if (MAYBE_ON) x
-
-#define MAX(a, b) b > a ? b : a
-#define MIN(a, b) b < a ? b : a
-
 //args: width height mines ...
 int main (int argv, char *argc[]) {
 	Board boardh; //boardh == board hidden
