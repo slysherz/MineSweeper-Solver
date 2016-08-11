@@ -1,3 +1,5 @@
+#include "solver.h"
+
 int solveMineSweeper(Board boardh, Board boardv) {
 	// Initialize groups
 	groupListArrayNumber = 0;
