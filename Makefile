@@ -1,28 +1,31 @@
+CC=gcc
+CFLAGS=-O3
+
 all: ms-solver
 
 ms-solver: main.o board.o board_tools.o group.o group_list.o solver.o ui.o
-	gcc main.o board.o board_tools.o group.o group_list.o solver.o ui.o -o ms-solver -I.
+	$(CC) main.o board.o board_tools.o group.o group_list.o solver.o ui.o -o ms-solver -I. $(CFLAGS)
 
 main.o: main.c
-	gcc -c main.c -I.
+	$(CC) -c main.c -I. $(CFLAGS)
 
 board.o: board.c
-	gcc -c board.c -I.
+	$(CC) -c board.c -I. $(CFLAGS)
 
 board_tools.o: board_tools.c
-	gcc -c board_tools.c -I.
+	$(CC) -c board_tools.c -I. $(CFLAGS)
 
 group.o: group.c
-	gcc -c group.c -I.
+	$(CC) -c group.c -I. $(CFLAGS)
 
 group_list.o: group_list.c
-	gcc -c group_list.c -I.
+	$(CC) -c group_list.c -I. $(CFLAGS)
 
 solver.o: solver.c
-	gcc -c solver.c -I.
+	$(CC) -c solver.c -I. $(CFLAGS)
 
 ui.o: ui.c
-	gcc -c ui.c -I.
+	$(CC) -c ui.c -I. $(CFLAGS)
 
 clean:
 	rm -rf *.o ms-solver
