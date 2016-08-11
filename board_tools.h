@@ -1,5 +1,7 @@
 #pragma once
 
+#include <board.h>
+
 // Adds num mines to a board
 void setMines (Board board, int num);
 // Traverses a board and sets each CLEAR to the number of mines around it
