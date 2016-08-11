@@ -29,11 +29,7 @@
  * clean main()
  * find a way to include the group with all the cells (maybe use a pointer in the struct instaed of 2D array)
 
-
-
-/******************************* USER INTERFACE *******************************/
-
-void getMineSweeperInput (int *x, int *y, char *played);
+*/
 
 //args: width height mines ...
 int main (int argv, char *argc[]) {
@@ -125,24 +121,3 @@ int main (int argv, char *argc[]) {
 		puts("\n\nRIP: You lost!");
 	}
 }
-
-void getMineSweeperInput (int *x, int *y, char *played) {
-	char separator[16];
-	
-	puts("\nInput:");
-	while (1) {
-		
-		int scanned = scanf("%c%16[^0-9]%d%16[^0-9]%d", played, separator, x, separator, y);
-		fseek(stdin, 0, SEEK_END);	// Flush new line
-		
-		if (scanned > 0) {
-			// Check that parameters make sense
-			printf("\nGot: %c at (%d, %d)", *played, *x, *y);
-			break;
-		}
-		
-		puts("Invalid intput, please try again: ");
-	}
-}
-
-
