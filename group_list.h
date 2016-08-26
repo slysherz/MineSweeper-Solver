@@ -11,4 +11,4 @@
 void addToList (Group *group);
 
 // Removes the group with index 'index' from the group
-void removeFromList (int index);
+void removeFromList (Group *group);
