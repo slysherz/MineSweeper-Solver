@@ -15,4 +15,5 @@ void removeFromList (Group *group) {
 		ptr=ptr->next;	
 	}
 	ptr->next=group->next;
+	free(group);
 }

@@ -1,8 +1,9 @@
 #include "solver.h"
 
-extern int groupListArrayNumber;
+extern Group *groupHead;
 
 int solveMineSweeper(Board boardh, Board boardv) {
+	/*
 	// Initialize groups
 	groupListArrayNumber = 0;
 	for (int x = 0; x < boardv.width; x++) {
@@ -13,8 +14,8 @@ int solveMineSweeper(Board boardh, Board boardv) {
 				continue;
 			}
 			
-			Group newGroup = buildGroup(boardv, x, y);
-			if (newGroup.size != 0) {
+			Group *newGroup = buildGroup(boardv, x, y);
+			if (newGroup->size != 0) {
 				addToList(newGroup);
 			}
 		}
@@ -25,7 +26,7 @@ int solveMineSweeper(Board boardh, Board boardv) {
 MAYBE(printf("creation of groups complete\n"));
 		for (int i = 0; i < groupListArrayNumber; i++) {
 			for (int j = i + 1; j < groupListArrayNumber; j++) {
-MAYBE(printf("G%d[%d/%d]; G%d[%d/%d]; GLAN: %d)\n", i, groupList[i].mines, groupList[i].size, j, groupList[j].mines, groupList[j].size, groupListArrayNumber));
+//MAYBE(printf("G%d[%d/%d]; G%d[%d/%d]; GLAN: %d)\n", i, groupList[i].mines, groupList[i].size, j, groupList[j].mines, groupList[j].size, groupListArrayNumber));
 				if (groupList[i].size == groupList[j].size	// Groups are
 				&& containedIn(groupList[i], groupList[j])) {	// the same
 					removeFromList(j);
@@ -136,8 +137,9 @@ MAYBE(printf("Marking Mine (%d,%d)\n", groupList[i].positions[j][0], groupList[i
 			return NEUTRAL;
 		}
 	}
+	*/
 }
-
+/*
 int intersectSolver(Group a, Group b){
 	if (intersect(a, b)){
 		int i = intersect(a, b);
@@ -162,5 +164,6 @@ int intersectSolver(Group a, Group b){
 	}
 	return -1;
 }
+*/
 
 
