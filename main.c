@@ -9,7 +9,7 @@
 #include <solver.h>
 #include <ui.h>
 
-int groupListArrayNumber = 0;
+Group *groupHead = NULL;
 
 //args: width height mines ...
 int main (int argv, char *argc[]) {
