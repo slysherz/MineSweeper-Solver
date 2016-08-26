@@ -26,7 +26,6 @@ MAYBE(printf("creation of groups complete\n"));
 		for (int i = 0; i < groupListArrayNumber; i++) {
 			for (int j = i + 1; j < groupListArrayNumber; j++) {
 MAYBE(printf("G%d[%d/%d]; G%d[%d/%d]; GLAN: %d)\n", i, groupList[i].mines, groupList[i].size, j, groupList[j].mines, groupList[j].size, groupListArrayNumber));
-				int x;
 				if (groupList[i].size == groupList[j].size	// Groups are
 				&& containedIn(groupList[i], groupList[j])) {	// the same
 					removeFromList(j);
@@ -49,40 +48,23 @@ MAYBE(printGroup(groupList[j]));
 					groupList[i] = subtract(groupList[i],groupList[j]);
 MAYBE(printGroup(groupList[i]));
 				}
-				else if (x = intersect(groupList[i], groupList[j])) {
+				else if (intersectSolver(groupList[i], groupList[j])>=0) {
+					int x = intersectSolver(groupList[i], groupList[j]);
 MAYBE(printf("FIRST: %d, SECOND: %d\n", groupList[i].mines - (groupList[i].size - x), groupList[j].mines - (groupList[j].size - x)));
-					int minmine = MAX(
-						groupList[i].mines - (groupList[i].size - x), 
-						(MAX( 
-							groupList[j].mines - (groupList[j].size - x), 
-							0
-						))
-					);
-					
-					int maxmine = MIN(
-						groupList[i].mines, 
-						(MIN( 
-							groupList[j].mines, 
-							x
-						))
-					);
 
-MAYBE(printf("\nINTERCEPTION: min: %d max: %d\n", minmine, maxmine));
+
+MAYBE(printf("\nINTERCEPTION: mine:%d\n", x));
 MAYBE(printGroup(groupList[i]));
 MAYBE(printGroup(groupList[j]));
 
-					if (minmine == maxmine) {	// IF BUG, CHECK HERE!
-						Group a, b;
-						a = subtract(groupList[i], groupList[j]);	// LEFT
-						b = subtract(groupList[i], a);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						b.mines = minmine;
-						addToList(b);
-						groupList[i] = subtract(groupList[i], b);
-						groupList[j] = subtract(groupList[j], b);	// 00:56 29/07/2016: Moreno firstly used spaces here
-					} 
-					else {
-						continue;
-					}												// disapointed with the date-time structure standards used by Ribeiro
+
+					Group a, b;
+					a = subtract(groupList[i], groupList[j]);	// LEFT
+					b = subtract(groupList[i], a);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					b.mines = x;
+					addToList(b);
+					groupList[i] = subtract(groupList[i], b);
+					groupList[j] = subtract(groupList[j], b);
 				}
 				else {
 					continue;
@@ -155,3 +137,30 @@ MAYBE(printf("Marking Mine (%d,%d)\n", groupList[i].positions[j][0], groupList[i
 		}
 	}
 }
+
+int intersectSolver(Group a, Group b){
+	if (intersect(a, b)){
+		int i = intersect(a, b);
+		int minmine = MAX(
+			a.mines - (a.size - i),
+			(MAX( 
+				b.mines - (b.size - i), 
+				0
+			))
+		);
+		
+		int maxmine = MIN(
+			a.mines, 
+			(MIN( 
+				b.mines, 
+				i
+			))
+		);
+		if (minmine==maxmine){
+			return minmine;
+		}
+	}
+	return -1;
+}
+
+
