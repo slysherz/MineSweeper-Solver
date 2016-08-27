@@ -1,23 +1,30 @@
 #include "group.h"
 
+Group* groupCopy(Group *group){
+	Group *copy = (Group*)malloc(sizeof(Group));
+	memcpy(copy, group, sizeof(Group));
+	return copy;
+}
+
 Group* buildGroup(Board board, int x, int y) {
-	Group* group = (Group*)malloc(sizeof(Group));
-	
+	Group *group;
+	group = (Group*)malloc(sizeof(Group));
+	//printf("group ptr: %d",*group);
 	group->mines = (int) get(board, x, y) - (int) '0' - countClose(board, x, y, MINE);
-	int n = countClose(board, x, y, UNKNOWN);
-	int *pos[n][2];
-	n = 0;
+	group->size = countClose(board, x, y, UNKNOWN);
+	int *pos = (int*)malloc(sizeof(int)*2*group->size);
+	int s = 0;
 	for (int i = -1; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++) {
 			if (!(i == 0 && j == 0) && get(board, x+i, y+j) == UNKNOWN) {
-				*pos[n][0] = x + i;
-				*pos[n][1] = y + j;
-				n++;
+				pos[s] = x + i;
+				s++;
+				pos[s] = y + j;
+				s++;
 			}
 		}
 	}
-	group->size = n;
-	group->positions = *pos;
+	group->positions = pos;
 	
 	return group;
 }
@@ -25,23 +32,23 @@ Group* buildGroup(Board board, int x, int y) {
 void printGroup (Group *group) {
 	printf("--- %d/%d ---\n", group->mines, group->size);
 	
-	for (int i = 0; i < group->size; i++) {
-		printf("(%d, %d), ", group->positions[i][0], group->positions[i][1]);
+	for (int i = 0; i < group->size*2; i+=2) {
+		printf("(%d, %d), ", group->positions[i], group->positions[i+1]);
 	}
 	
 	printf("\n");
 } 
 
 // from = from - group
-Group* subtract (Group *from, Group *group) {
-	for (int i = 0; i < group->size; i++) {
-		for (int j = 0; j < from->size; j++) {
-			if (group->positions[i][0] == from->positions[j][0] 
-			&& 	group->positions[i][1] == from->positions[j][1]) {
+void subtract (Group *from, Group *group) {
+	for (int i = 0; i < group->size*2; i+=2) {
+		for (int j = 0; j < from->size*2; j+=2) {
+			if (group->positions[i] == from->positions[j] 
+			&& 	group->positions[i+1] == from->positions[j+1]) {
 				
 				int last = from->size - 1;
-				from->positions[j][0] = from->positions[last][0];
-				from->positions[j][1] = from->positions[last][1];
+				from->positions[j] = from->positions[last];
+				from->positions[j+1] = from->positions[last+1];
 				
 				from->size--;
 				
@@ -51,13 +58,11 @@ Group* subtract (Group *from, Group *group) {
 	}
 	
 	from->mines -= group->mines;
-	
-	return from;
 }
 
 bool cellContainedIn (int x, int y, Group *group) {
-	for (int i = 0; i < group->size; i++) {
-		if (x == group->positions[i][0] && y == group->positions[i][1]) {
+	for (int i = 0; i < group->size*2; i+=2) {
+		if (x == group->positions[i] && y == group->positions[i+1]) {
 			return 1;
 		}
 	}
@@ -70,8 +75,8 @@ bool containedIn (Group *a, Group *b) {
 		return 0;
 	}
 	
-	for (int i = 0; i < a->size; i++) {
-		if (!cellContainedIn(a->positions[i][0], a->positions[i][1], b)) {
+	for (int i = 0; i < a->size*2; i+=2) {
+		if (!cellContainedIn(a->positions[i], a->positions[i+1], b)) {
 			return 0;
 		}
 	}
@@ -81,8 +86,8 @@ bool containedIn (Group *a, Group *b) {
 
 int intersect(Group *a, Group *b) {
 	int n=0;
-	for(int i = 0; i < a->size; i++) {
-		if (cellContainedIn(a->positions[i][0], a->positions[i][1], b)) {
+	for(int i = 0; i < a->size*2; i+=2) {
+		if (cellContainedIn(a->positions[i], a->positions[i+1], b)) {
 			n++;
 		}
 	}

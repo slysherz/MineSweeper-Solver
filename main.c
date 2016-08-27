@@ -76,6 +76,28 @@ int main (int argv, char *argc[]) {
 		makePlay(boardh, boardv, 0, 0, CLEAR);
 		printf("Board Initial State: ");
 		printBoard(boardv);
+		printf("let the tests beguin");
+		/*Group *bat = buildGroup(boardv, 0, 0);
+		addToList(bat);
+		makePlay(boardh, boardv, 0, 1, CLEAR);
+		Group *bet =buildGroup(boardv, 0, 1);
+		addToList(bet);
+		makePlay(boardh, boardv, 1, 0, CLEAR);
+		Group *bit =buildGroup(boardv, 1, 0);
+		addToList(bit);
+		printGroupList();
+		removeFromList(bet);
+		printGroupList();*/
+
+
+
+
+
+
+
+
+
+
 		solveMineSweeper(boardh, boardv);
 		exit(0);
 	}

@@ -12,3 +12,5 @@ void addToList (Group *group);
 
 // Removes the group with index 'index' from the group
 void removeFromList (Group *group);
+
+void printGroupList();

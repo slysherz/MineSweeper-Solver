@@ -8,6 +8,7 @@ void printBoard(Board board) {
 			printf("%c", get(board, x, y));
 		}
 		printf("\n");
+		
 	}
 }
 
