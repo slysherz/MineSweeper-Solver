@@ -142,7 +142,7 @@ int intersectSolver(Group *a, Group *b){
 }
 
 
-bool sanitaize(Group *pi, Group *pj){
+bool clean(Group *pi, Group *pj){
 	
 	if (pi->size == pj->size && containedIn(pi, pj)) {
 		removeFromList(pj);
@@ -174,13 +174,13 @@ bool sanitaize(Group *pi, Group *pj){
 	return 1;
 }
 
-void sanitaizeEtAll(Group *group){
+void cleanEtAll(Group *group){
 	Group *ptr=groupHead;
 	while(ptr!=NULL){
 		if(ptr==group){
 			ptr=ptr->next;
 		}
-		sanitaize(group, ptr);
+		clean(group, ptr);
 		ptr=ptr->next;
 	}
 }
