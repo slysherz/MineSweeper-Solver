@@ -24,72 +24,22 @@ int solveMineSweeper(Board boardh, Board boardv) {
 
 	while (1) {
 MAYBE(printf("creation of groups complete\n"));	
-		Group *pi = groupHead, *pj = pi->next;
+		Group *pi = groupHead, *pj; 
 
 		while (pi!=NULL){
+MAYBE(printf("1st while\n"));
+			pj=pi->next;
 			while(pj!=NULL){
-			
-
-
-
-
-//		for (int i = 0; i < groupListArrayNumber; i++) {
-//			for (int j = i + 1; j < groupListArrayNumber; j++) {
-//MAYBE(printf("G%d[%d/%d]; G%d[%d/%d]; GLAN: %d)\n", i, groupList[i].mines, groupList[i].size, j, groupList[j].mines, groupList[j].size, groupListArrayNumber));
-				if (pi->size == pj->size	// Groups are
-				&& containedIn(pi, pj)) {	// the same
-					removeFromList(pj);
-MAYBE(printf("remove\n"));
-				} 
-				else if (containedIn(pi, pj)) { 
-					//remove elements of i from j
-//MAYBE(printf("SUB: G%d - G%d\n", j, i));
-//MAYBE(printGroup(groupList[j]));
-//MAYBE(printGroup(groupList[i]));
-					subtract(pj, pi);
-//MAYBE(printGroup(groupList[j]));
-				}
-				else if (containedIn(pj, pi)) {
-					//remove elements of j from i
-					
-//MAYBE(printf("SUB: G%d - G%d\n", i, j));
-//MAYBE(printGroup(groupList[i]));
-//MAYBE(printGroup(groupList[j]));
-					subtract(pi, pj);
-//MAYBE(printGroup(groupList[i]));
-				}
-				else if (intersectSolver(pi, pj)>=0) {
-					int x = intersectSolver(pi, pj);
-//MAYBE(printf("FIRST: %d, SECOND: %d\n", groupList[i].mines - (groupList[i].size - x), groupList[j].mines - (groupList[j].size - x)));
-
-
-MAYBE(printf("\nINTERCEPTION: mine:%d\n", x));
-//MAYBE(printGroup(groupList[i]));
-//MAYBE(printGroup(groupList[j]));
-
-
-					Group *a;
-					a = groupCopy(pi);
-					subtract(pi, pj);	// LEFT
-					subtract(a, pi);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					a->mines = x;
-					addToList(a);
-					subtract(pj, a);
-					pi->mines = pi->mines + pj->mines - x;
-				}
-				else {
+MAYBE(printf("2nd while\n"));
+				if(sanitaize(pi, pj)){
 					pj=pj->next;
-					continue;
 				}
-				
-				pi=groupHead;	// Reset outer while
-				pj=pi->next;
-				break;
-
-
+				else{
+					pj=NULL;
+					pi=groupHead;
+				}			
 			}	
 			pi=pi->next;
-			pj=pi->next;
 		}
 
 
@@ -190,3 +140,38 @@ int intersectSolver(Group *a, Group *b){
 	}
 	return -1;
 }
+
+
+bool sanitaize(Group *pi, Group *pj){
+	
+	if (pi->size == pj->size && containedIn(pi, pj)) {
+		removeFromList(pj);
+	} 
+	else if (containedIn(pi, pj)) { 
+					//remove elements of i from j
+		subtract(pj, pi);
+	}
+	else if (containedIn(pj, pi)) {
+					//remove elements of j from i
+					
+		subtract(pi, pj);
+	}
+	else if (intersectSolver(pi, pj)>=0) {
+		int x = intersectSolver(pi, pj);
+
+
+		Group *a;
+		a = groupCopy(pi);
+		subtract(pi, pj);	// LEFT
+		subtract(a, pi);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		a->mines = x;
+		addToList(a);
+		subtract(pj, a);
+		pi->mines = pi->mines + pj->mines - x;
+	}
+	else {
+		return 0;
+	}
+	return 1;
+}
+

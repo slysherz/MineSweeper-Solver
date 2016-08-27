@@ -76,7 +76,7 @@ int main (int argv, char *argc[]) {
 		makePlay(boardh, boardv, 0, 0, CLEAR);
 		printf("Board Initial State: ");
 		printBoard(boardv);
-		printf("let the tests beguin");
+		printf("let the tests beguin\n");
 		/*Group *bat = buildGroup(boardv, 0, 0);
 		addToList(bat);
 		makePlay(boardh, boardv, 0, 1, CLEAR);
@@ -87,8 +87,8 @@ int main (int argv, char *argc[]) {
 		addToList(bit);
 		printGroupList();
 		removeFromList(bet);
-		printGroupList();*/
-
+		printGroupList();
+*/
 
 
 
