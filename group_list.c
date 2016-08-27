@@ -8,7 +8,7 @@ void addToList (Group *group) {
 }
 
 
-void removeFromList (Group *group) {
+Group* removeFromList (Group *group) {
 
 	Group *ptr = groupHead;
 	while(ptr->next != group && ptr->next != NULL){
@@ -16,6 +16,7 @@ void removeFromList (Group *group) {
 	}
 	ptr->next=group->next;
 	freeGroup(group);
+	return ptr;
 }
 void printGroupList(){
 	Group *ptr=groupHead;

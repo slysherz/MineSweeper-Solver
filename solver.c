@@ -45,8 +45,6 @@ MAYBE(printf("creation of groups complete\n"));
 
 
 
-//			}
-//		}
 
 MAYBE(printf("cleaning of groups complete\n"));
 		bool stallAlert = 0;
@@ -54,22 +52,20 @@ MAYBE(printf("cleaning of groups complete\n"));
 		while(ptr!=NULL){
 
 
-//		for (int i = 0; i < forMax; i++){
-//MAYBE(printf("for i:%d forMax:%d\n",i,forMax));
 			int result = NEUTRAL;
 			if (ptr->mines == 0) {
 				for (int  j =0; j < ptr->size*2; j+=2) {
 					makePlay(boardh, boardv, ptr->positions[j], ptr->positions[j+1],CLEAR);
-//MAYBE(printf("Marking Clear (%d,%d)\n", groupList[i].positions[j][0], groupList[i].positions[j][1]));
+MAYBE(printf("Marking Clear (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 				}
 			} 
 			else if (ptr->mines == ptr->size) {
 				for (int  j = 0; j < ptr->size*2; j+=2) {
 					makePlay(boardh, boardv, ptr->positions[j], ptr->positions[j+1], MINE);
-//MAYBE(printf("Marking Mine (%d,%d)\n", groupList[i].positions[j][0], groupList[i].positions[j][1]));
+MAYBE(printf("Marking Mine (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 					
 				}
-				removeFromList(ptr);
+				ptr = removeFromList(ptr);
 			} 
 			else {
 				ptr=ptr->next;
@@ -82,7 +78,6 @@ MAYBE(printf("cleaning of groups complete\n"));
 			ptr=ptr->next;
 		}
 		
-	//	for (int i = 0; i < forMax; i++){
 
 		ptr=groupHead;
 		while(ptr!=NULL){
@@ -98,9 +93,8 @@ MAYBE(printf("cleaning of groups complete\n"));
 						freeGroup(newGroup);
 					}
 				}
-				
 				// Delete group
-				removeFromList(ptr);
+				ptr=removeFromList(ptr);
 			}
 			ptr=ptr->next;	
 		}
