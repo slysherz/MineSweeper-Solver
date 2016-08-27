@@ -23,13 +23,11 @@ int solveMineSweeper(Board boardh, Board boardv) {
 	}
 
 	while (1) {
-MAYBE(printf("creation of groups complete\n"));	
 
 
 
 		cleanEtAll(groupHead);
 
-MAYBE(printf("cleaning of groups complete\n"));
 		bool stallAlert = 0;
 		Group *ptr = groupHead;
 		while(ptr!=NULL){
@@ -39,7 +37,6 @@ MAYBE(printf("cleaning of groups complete\n"));
 			if (ptr->mines == 0) {
 				for (int  j =0; j < ptr->size*2; j+=2) {
 					makePlay(boardh, boardv, ptr->positions[j], ptr->positions[j+1],CLEAR);
-MAYBE(printf("Marking Clear (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 										
 					Group *newGroup = buildGroup(boardv, ptr->positions[j], ptr->positions[j+1]); 
 					if (newGroup->size > 0) {
@@ -61,14 +58,12 @@ MAYBE(printf("Marking Clear (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]))
 			else if (ptr->mines == ptr->size) {
 				for (int  j = 0; j < ptr->size*2; j+=2) {
 					makePlay(boardh, boardv, ptr->positions[j], ptr->positions[j+1], MINE);
-MAYBE(printf("Marking Mine (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 					
 				}
 				ptr = removeFromList(ptr);
 
 				stallAlert=1;
 				continue;
-//MAYBE(printGroupList());
 			} 
 			ptr=ptr->next;
 			
@@ -137,13 +132,14 @@ bool clean(Group *pi, Group *pj){
 		a = groupCopy(pi);
 		subtract(pi, pj);	// LEFT
 		pi->mines = pi->mines + pj->mines - x;
-		cleanEtAll(pi);
 
 		subtract(a, pi);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		addToList(a);
-		cleanEtAll(a);
 
 		subtract(pj, a);
+
+		cleanEtAll(pi);
+		cleanEtAll(a);
 		cleanEtAll(pj);
 
 		return 1;
@@ -156,6 +152,7 @@ void cleanEtAll(Group *group){
 	while(ptr!=NULL){
 		if(ptr==group){
 			ptr=ptr->next;
+			continue;
 		}
 		if(clean(group, ptr)){
 			break;
