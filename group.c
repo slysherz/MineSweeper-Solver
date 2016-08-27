@@ -1,8 +1,16 @@
 #include "group.h"
 
+void freeGroup(Group *group){
+	free(group->positions);
+	free(group);
+}
+
 Group* groupCopy(Group *group){
 	Group *copy = (Group*)malloc(sizeof(Group));
 	memcpy(copy, group, sizeof(Group));
+	int *pos = (int*)malloc(sizeof(int)*2*group->size);
+	memcpy(pos, group->positions, sizeof(int)*2*group->size);
+	copy->positions=pos;
 	return copy;
 }
 
@@ -43,10 +51,9 @@ void printGroup (Group *group) {
 void subtract (Group *from, Group *group) {
 	for (int i = 0; i < group->size*2; i+=2) {
 		for (int j = 0; j < from->size*2; j+=2) {
-			if (group->positions[i] == from->positions[j] 
-			&& 	group->positions[i+1] == from->positions[j+1]) {
+			if (group->positions[i] == from->positions[j] && group->positions[i+1] == from->positions[j+1]) {
 				
-				int last = from->size - 1;
+				int last = 2*(from->size - 1);
 				from->positions[j] = from->positions[last];
 				from->positions[j+1] = from->positions[last+1];
 				

@@ -28,3 +28,6 @@ int intersect(Group *a, Group *b);
 
 //copy group
 Group* groupCopy(Group *group);
+
+void freeGroup(Group *group);
+

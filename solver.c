@@ -17,7 +17,7 @@ int solveMineSweeper(Board boardh, Board boardv) {
 				addToList(newGroup);
 			}
 			else {
-				free(newGroup);
+				freeGroup(newGroup);
 			}
 		}
 	}
@@ -27,17 +27,18 @@ MAYBE(printf("creation of groups complete\n"));
 		Group *pi = groupHead, *pj; 
 
 		while (pi!=NULL){
-MAYBE(printf("1st while\n"));
+//MAYBE(printf("1st while\n"));
 			pj=pi->next;
 			while(pj!=NULL){
-MAYBE(printf("2nd while\n"));
+//MAYBE(printf("2nd while\n"));
 				if(sanitaize(pi, pj)){
-					pj=pj->next;
-				}
-				else{
 					pj=NULL;
 					pi=groupHead;
-				}			
+				}
+				else{
+					pj=pj->next;
+				}
+//MAYBE(printGroupList());			
 			}	
 			pi=pi->next;
 		}
@@ -94,7 +95,7 @@ MAYBE(printf("cleaning of groups complete\n"));
 						addToList(newGroup);
 					}
 					else {
-						free(newGroup);
+						freeGroup(newGroup);
 					}
 				}
 				
@@ -158,16 +159,23 @@ bool sanitaize(Group *pi, Group *pj){
 	}
 	else if (intersectSolver(pi, pj)>=0) {
 		int x = intersectSolver(pi, pj);
-
+MAYBE(printf("before\n"));
+MAYBE(printGroup(pi));
+MAYBE(printGroup(pj));
 
 		Group *a;
 		a = groupCopy(pi);
+MAYBE(printGroup(a));
 		subtract(pi, pj);	// LEFT
 		subtract(a, pi);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		a->mines = x;
 		addToList(a);
 		subtract(pj, a);
-		pi->mines = pi->mines + pj->mines - x;
+		pi->mines = pi->mines + pj->mines;
+MAYBE(printf("after\n"));
+MAYBE(printGroup(pi));
+MAYBE(printGroup(pj));
+MAYBE(printGroup(a));
 	}
 	else {
 		return 0;
