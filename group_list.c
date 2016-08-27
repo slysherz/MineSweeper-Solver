@@ -10,13 +10,13 @@ void addToList (Group *group) {
 
 Group* removeFromList (Group *group) {
 
-	Group *ptr = groupHead;
-	while(ptr->next != group && ptr->next != NULL){
-		ptr=ptr->next;	
+	Group **ptr = &groupHead;
+	while(*ptr != group){
+		ptr=&((*ptr)->next);	
 	}
-	ptr->next=group->next;
+	*ptr=(*ptr)->next;
 	freeGroup(group);
-	return ptr->next;
+	return (*ptr)->next;
 }
 void printGroupList(){
 	Group *ptr=groupHead;
