@@ -65,12 +65,7 @@ MAYBE(printf("Marking Clear (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]))
 MAYBE(printf("Marking Mine (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 					
 				}
-//MAYBE(printGroupList());
-MAYBE(printf("before del: %p\n",ptr));
-MAYBE(printGroup(ptr));
 				ptr = removeFromList(ptr);
-MAYBE(printf("after del: %p\n",ptr));
-//MAYBE(printGroup(ptr));
 
 				stallAlert=1;
 				continue;
@@ -103,16 +98,8 @@ MAYBE(printf("after del: %p\n",ptr));
 					}
 				}
 				// Delete group
-//MAYBE(printGroupList());
-//MAYBE(printGroup(ptr));
-MAYBE(printf("before del: %p\n",ptr));
-MAYBE(printGroup(ptr));
 				ptr=removeFromList(ptr);
-MAYBE(printf("after del: %p\n",ptr));
-//MAYBE(printGroup(ptr));
 				continue;
-//MAYBE(printGroupList());
-//MAYBE(printGroup(ptr));
 			}
 			ptr=ptr->next;	
 		}
@@ -171,23 +158,15 @@ bool sanitaize(Group *pi, Group *pj){
 	}
 	else if (intersectSolver(pi, pj)>=0) {
 		int x = intersectSolver(pi, pj);
-MAYBE(printf("before\n"));
-MAYBE(printGroup(pi));
-MAYBE(printGroup(pj));
 
 		Group *a;
 		a = groupCopy(pi);
-MAYBE(printGroup(a));
 		subtract(pi, pj);	// LEFT
 		subtract(a, pi);  //isto vai dar merda!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		a->mines = x;
 		addToList(a);
 		subtract(pj, a);
 		pi->mines = pi->mines + pj->mines;
-MAYBE(printf("after\n"));
-MAYBE(printGroup(pi));
-MAYBE(printGroup(pj));
-MAYBE(printGroup(a));
 	}
 	else {
 		return 0;
