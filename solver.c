@@ -32,8 +32,8 @@ MAYBE(printf("creation of groups complete\n"));
 			while(pj!=NULL){
 //MAYBE(printf("2nd while\n"));
 				if(sanitaize(pi, pj)){
-					pj=NULL;
 					pi=groupHead;
+					break;
 				}
 				else{
 					pj=pj->next;
@@ -172,5 +172,16 @@ bool sanitaize(Group *pi, Group *pj){
 		return 0;
 	}
 	return 1;
+}
+
+void sanitaizeEtAll(Group *group){
+	Group *ptr=groupHead;
+	while(ptr!=NULL){
+		if(ptr==group){
+			ptr=ptr->next;
+		}
+		sanitaize(group, ptr);
+		ptr=ptr->next;
+	}
 }
 
