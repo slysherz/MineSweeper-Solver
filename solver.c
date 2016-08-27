@@ -65,7 +65,15 @@ MAYBE(printf("Marking Clear (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]))
 MAYBE(printf("Marking Mine (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 					
 				}
+//MAYBE(printGroupList());
+//MAYBE(printGroup(ptr));
+MAYBE(printf("before del: %p\n",ptr));
 				ptr = removeFromList(ptr);
+MAYBE(printf("after del: %p\n",ptr));
+				stallAlert=1;
+				continue;
+//MAYBE(printGroupList());
+//MAYBE(printGroup(ptr));
 			} 
 			else {
 				ptr=ptr->next;
@@ -94,7 +102,14 @@ MAYBE(printf("Marking Mine (%d,%d)\n", ptr->positions[j], ptr->positions[j+1]));
 					}
 				}
 				// Delete group
+//MAYBE(printGroupList());
+//MAYBE(printGroup(ptr));
+MAYBE(printf("before del: %p\n",ptr));
 				ptr=removeFromList(ptr);
+MAYBE(printf("after del: %p\n",ptr));
+				continue;
+//MAYBE(printGroupList());
+//MAYBE(printGroup(ptr));
 			}
 			ptr=ptr->next;	
 		}

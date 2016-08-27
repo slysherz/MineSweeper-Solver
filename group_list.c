@@ -16,7 +16,7 @@ Group* removeFromList (Group *group) {
 	}
 	ptr->next=group->next;
 	freeGroup(group);
-	return ptr;
+	return ptr->next;
 }
 void printGroupList(){
 	Group *ptr=groupHead;
