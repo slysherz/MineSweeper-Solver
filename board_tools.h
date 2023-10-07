@@ -2,7 +2,7 @@
 
 #include <time.h>
 
-#include <board.h>
+#include "board.h"
 
 // Adds num mines to a board
 void setMines (Board board, int num);

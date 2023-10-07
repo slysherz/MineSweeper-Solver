@@ -6,8 +6,8 @@
 
 //#include <board.h>
 //#include <board_tools.h>
-#include <solver.h>
-#include <ui.h>
+#include "solver.h"
+#include "ui.h"
 
 int groupListArrayNumber = 0;
 

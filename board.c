@@ -1,4 +1,4 @@
-#include <board.h>
+#include "board.h"
 
 void printBoard(Board board) {
 	puts("\n");

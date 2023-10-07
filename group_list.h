@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-#include <group.h>
+#include "group.h"
 
 #define GSIZE 1000000
 
