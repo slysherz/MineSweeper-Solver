@@ -38,7 +38,7 @@ int size(Board board) {
 	return board.width * board.height;
 }
 
-Board buildBoardFromFile (char *file) {
+Board buildBoardFromFile (const char *file) {
 	printf("Building board from file: %s\n", file);
 	
 	FILE *filePtr;

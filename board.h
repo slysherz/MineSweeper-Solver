@@ -37,6 +37,6 @@ void set (Board board, int x, int y, char value);
 // Returns the area of the grid
 int size(Board board);
 
-Board buildBoardFromFile(char file[]);
+Board buildBoardFromFile(const char file[]);
 
 void printBoard(Board board);
