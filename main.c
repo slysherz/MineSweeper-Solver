@@ -13,6 +13,10 @@
 int groupListArrayNumber = 0;
 
 void checkOrQuit(char *argc[], bool cond) {
+	if (cond) {
+		return;
+	}
+
 	printf("usage: \n\t%s -w [width] -h [height] -m [mines] -f [file] -a\n", argc[0]);
 	exit(-1);
 }
