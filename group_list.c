@@ -1,6 +1,6 @@
 #include "group_list.h"
 
-//Group groupList[1000000];
+Group groupList[GSIZE];
 extern int groupListArrayNumber;
 void addToList (Group group) {
 	if (groupListArrayNumber>=GSIZE){

@@ -2,7 +2,7 @@
 #include "ui.h"
 
 void getMineSweeperInput (int *x, int *y, char *played) {
-	char separator[16];
+	char separator[17];
 	
 	puts("\nInput: C|M|? X Y");
 	while (1) {

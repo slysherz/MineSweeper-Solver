@@ -7,7 +7,7 @@
 #define GSIZE 1000000
 
 // Simple way to have a list with all the current groups
-Group groupList[GSIZE];
+extern Group groupList[GSIZE];
 
 // Current size of the list
 //int groupListArrayNumber = 0;
