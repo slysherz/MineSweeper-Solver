@@ -19,11 +19,11 @@
 
 #define LIMIT 100000
 
-typedef struct {
+typedef struct Board {
 	int width;
 	int height;
 	char *grid;
-} Board ;
+} Board;
 
 // Checks if position (x, y) is inside the grid
 bool checkBounds (Board board, int x, int y);

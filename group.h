@@ -3,11 +3,11 @@
 #include "board_tools.h"
 
 // A group is a list with 'size' cells, which contains 'mines' mines
-typedef struct {
+typedef struct Group {
 	int mines;
 	int positions[8][2];
 	int size;
-} Group ;
+} Group;
 
 Group buildGroup (Board board, int x, int y);
 
