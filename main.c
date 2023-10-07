@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <stdbool.h>
+#include <assert.h>
 
 //#include <board.h>
 //#include <board_tools.h>
@@ -11,43 +12,41 @@
 
 int groupListArrayNumber = 0;
 
+void checkOrQuit(char *argc[], bool cond) {
+	printf("usage: \n\t%s -w [width] -h [height] -m [mines] -f [file] -a\n", argc[0]);
+	exit(-1);
+}
+
 //args: width height mines ...
 int main (int argv, char *argc[]) {
 	Board boardh; //boardh == board hidden
 	Board boardv; //boardv == board visible
 
 	int mines = 10, width = 8, height = 8;
-	bool autoSolve=0;
-	
-	bool loadFromFile = 0;
-	if (strcmp(argc[1], "f") == 0 && (argv==3 || (argv==4 && strcmp(argc[3], "a") == 0))) {
-		loadFromFile = 1;
-		if (argv == 4) {
-			autoSolve = 1;
-		}
-		
-	}
-	else if (argv == 4 || (argv == 5 && 0==strcmp("a",argc[4]))) {
-		if (argv == 5) {
-			autoSolve = 1;
-		}
-		
-		width	= atoi(argc[1]);
-		height	= atoi(argc[2]);
-		mines	= atoi(argc[3]);
-		if (mines >= height * width * 8 / 10 /*|| mines < 0*/) {
-			printf("Too many mines!!!");
-			return 0;
-		}
-		
-	} 
-	else if (argv == 1 || (argv == 2 && 0 == strcmp("a",argc[1]))) {
-		if (argv == 2) {
-			autoSolve = 1;
+	bool autoSolve = false;
+	bool loadFromFile = false;
+	const char* file = NULL;
+	for (int i = 1; i < argv; i++) {
+		if (strcmp(argc[i], "-f") == 0) {
+			loadFromFile = true;
+			checkOrQuit(argc, i++ < argv);
+			file = argc[i];
+		} else if (strcmp(argc[i], "-a") == 0) {
+			autoSolve = true;
+		} else if (strcmp(argc[i], "-w") == 0) {
+			checkOrQuit(argc, i++ < argv);
+			width = atoi(argc[i]);
+		} else if (strcmp(argc[i], "-h") == 0) {
+			checkOrQuit(argc, i++ < argv);
+			height = atoi(argc[i]);
+		} else if (strcmp(argc[i], "-m") == 0) {
+			checkOrQuit(argc, i++ < argv);
+			mines = atoi(argc[i]);
 		}
 	}
-	else {
-		printf("usage: %s width hight mines\n", argc[0]);
+
+	if (mines >= height * width * 8 / 10 /*|| mines < 0*/) {
+		printf("Too many mines!!!");
 		return -1;
 	}
 	
@@ -61,7 +60,7 @@ int main (int argv, char *argc[]) {
 	setMines(boardh, mines);
 	
 	if (loadFromFile) {
-		boardh = buildBoardFromFile(argc[2]);
+		boardh = buildBoardFromFile(file);
 	}
 	boardv.width=boardh.width;
 	boardv.height=boardh.height;
